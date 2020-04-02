@@ -1,12 +1,13 @@
 # read me
-wget -i ./dataLoad/result.txt -P ~/BC  
+  
+1. 下载数据 ： wget -i ./dataLoad/result.txt -P ~/BC  
 
-ls  ~/BC/*.tar.gz | xargs -n1 tar xzvf
+2. 解压 ： ls  ~/BC/*.tar.gz | xargs -n1 tar xzvf
 
-python3 cropImage.py
+3. 大图切割 ： python3 cropImage.py
 
-ln -s ～/BC/BC/train ~/Documents/landsat/VOC2012
+4. 软连接训练集到工作目录 ： ln -s ～/BC/BC/train ~/Documents/landsat/VOC2012
 
-ln -s ～/BC/BC/val ~/Documents/landsat/VOC2012
+5. 软连接测试集到工作目录 ：ln -s ～/BC/BC/val ~/Documents/landsat/VOC2012
 
-python3 landsat.py
+6. 进行训练 ： python3 landsat.py
