@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 from datetime import datetime
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 from focal_loss import FocalLoss
 from BagData import test_dataloader, train_dataloader
 from test import evaluate, showEvaluate, read_list
@@ -72,7 +72,7 @@ def train(epo_num=10):
 
     all_train_iter_loss = []
     all_test_iter_loss = []
-    writer = SummaryWriter('log')
+    # writer = SummaryWriter('log')
     result = []
     global_step = 0
     # start timing
@@ -206,7 +206,7 @@ def train(epo_num=10):
         # np.save('./log/train_loss.npy', result)
         np.save('./log/train_eval_{}.npy'.format(epo), evaluateArray)
     
-    writer.close()
+    # writer.close()
     
 def get_acc_recall_precision(arr, y, y_):
     arr[0] += y.sum()

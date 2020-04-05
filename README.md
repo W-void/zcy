@@ -6,8 +6,8 @@
 
 3. 大图切割 ： python3 cropImage.py
 
-4. 软连接训练集到工作目录 ： ln -s ～/BC/BC/train ~/Documents/landsat/VOC2012
+4. 软连接训练集到工作目录 ： ln -s ～/BC/BC/train ${root}/VOC2012/train
 
-5. 软连接测试集到工作目录 ：ln -s ～/BC/BC/val ~/Documents/landsat/VOC2012
+5. 软连接测试集到工作目录 ：ln -s ～/BC/BC/val ${root}/VOC2012/val
 
 6. 进行训练 ： python3 landsat.py
