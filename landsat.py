@@ -33,12 +33,17 @@ def load_checkpoint(net, net_pretrained=None):
     else:
         net_dict = net.state_dict()
         net_pretrained_dict = net_pretrained.state_dict()
-        pretrained_dict = {k: v for k, v in net_pretrained_dict.items() if k in net_dict.keys()}
+        pretrained_dict = {k: v for k, v in net_pretrained_dict.items() if k[:3] == 'inc'}
+        # pretrained_dict = {k: v for k, v in net_pretrained_dict.items() if k in net_dict.keys()}
         # pretrained_dict.pop('outc.conv.weight')
         # pretrained_dict.pop('outc.conv.bias')
         print('Total : {}, update: {}'.format(len(net_pretrained_dict), len(pretrained_dict)))
         net_dict.update(pretrained_dict)
         net.load_state_dict(net_dict)
+        for d, p in zip(net_dict, net.parameters()):
+            if(d[:3] == 'inc'):
+                p.requires_grad = False
+
         print("loaded finished!")
         return net
 
@@ -48,9 +53,9 @@ def train(epo_num=10):
     # net = myModel(n_channel=10, n_class=2)
     net_pretrained = None
     # net_pretrained = torch.load("./checkpoints_attention/aspp_4.pt")
-    # net_pretrained = torch.load("./checkpoints_attention/SpoonNet2_0.pt")
-    net = SpoonNet(n_channels=10, n_classes=2)
-    modelName = 'SpoonNet'
+    # net_pretrained = torch.load("./checkpoints_attention/SpoonNet_5.pt")
+    net = SpoonNet2(n_channels=10, n_classes=2)
+    modelName = 'SpoonNetSpretral4'
     # net = UNet(10, 2)
     total_params = sum(p.numel() for p in net.parameters())
     print(total_params)
@@ -62,7 +67,7 @@ def train(epo_num=10):
     criterion = nn.CrossEntropyLoss().to(device)
     # criterion = FocalLoss().to(device)
     # criterion = nn.BCEWithLogitsLoss().to(device)
-    optimizer = optim.SGD(net.parameters(), lr=1e-3, momentum=0.9)
+    optimizer = optim.SGD(net.parameters(), lr=1e-1, momentum=0.9)
     # optimizer = optim.Adam(net.parameters(), lr=1e-1)
 
     all_train_iter_loss = []
@@ -73,6 +78,12 @@ def train(epo_num=10):
     # start timing
     prev_time = datetime.now()
     for epo in range(epo_num):
+        if epo < 1:
+            weights = [0.8, 0.2]
+        elif epo < 2:
+            weights = [0.2, 0.8]
+        else:
+            weights = [0, 1]
         train_loss = 0
         all_recall = 0.
         all_precision = 0.
@@ -89,7 +100,7 @@ def train(epo_num=10):
             regularization_loss = 0
             # for param in net.parameters():
             #     regularization_loss += torch.sum(torch.abs(param))
-            loss = 0.7 * criterion(output, bag_msk) + 0.3 * criterion(spectral, bag_msk)
+            loss = weights[0] * criterion(spectral, bag_msk) + weights[1] * criterion(output, bag_msk)
             # loss = criterion(output, bag_msk)
             
             optimizer.zero_grad()
@@ -113,7 +124,7 @@ def train(epo_num=10):
             # all_recall += recall
             # all_precision += precision
 
-            if np.mod(index, 5) == 0:
+            if np.mod(index, 15) == 0:
                 print('epoch {}, {:03d}/{},train loss is {:.4f}'.format(epo, index, len(train_dataloader), iter_loss), end="\n        ")
             #     print('recall: {:.4f}, precision: {:.4f}, f-score: {:.4f}'.format(
             #         recall, precision, 2*(recall*precision)/(recall+precision)))
@@ -172,7 +183,7 @@ def train(epo_num=10):
         time_str = "Time %02d:%02d:%02d" % (h, m, s)
         prev_time = cur_time
 
-        np.save('./log/spoonNetEvalArray_{}.npy'.format(epo), predEvalArray)
+        np.save('./log/'+modelName+'_{}.npy'.format(epo), predEvalArray)
         showEvaluate(predEvalArray)
 
         # train_loss = train_loss / len(train_dataloader)
