@@ -4,6 +4,6 @@ from .modelWithAttAndAspp import UNetWithAttAndAspp
 from .modelWithGroupConv import UNetWithGroupConv
 from .Spoon_Net import SpoonNet
 from .pointRend import rendNet
-
+from .spoonNet2 import SpoonNet2
 from .conv1 import conv1
 from .conv3 import conv3
