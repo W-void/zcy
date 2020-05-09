@@ -13,7 +13,7 @@ class rendNet(nn.Module):
         self.inc1 = DoubleConv(n_channels, 64, 1)
         # self.inc1 = DoubleConv(32, 64, 1)
         self.inc2 = DoubleConv(64, 128, 1)
-        self.inc3 = DoubleConv(128, 128, 1)
+        # self.inc3 = DoubleConv(128, 128, 1)
         self.inc3 = DoubleConv(128, 64, 1)
         self.inc4 = DoubleConv(64, self.groups, 1)
         self.down1 = Down(self.groups, 2*self.groups, 3, self.groups)

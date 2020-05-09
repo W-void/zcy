@@ -187,19 +187,3 @@ class Attention_block(nn.Module):
         psi = self.psi(psi)
 
         return x*psi
-
-
-class Attention_block_groups(nn.Module):
-    def __init__(self,F_g,F_l):
-        super(Attention_block_groups, self).__init__()
-        self.W_g = nn.Sequential(
-            nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True),
-            nn.Conv2d(F_g, F_l, kernel_size=1, stride=1, padding=0,bias=True, groups=F_l),
-            nn.BatchNorm2d(F_l),
-            nn.Sigmoid()
-            )
-                
-    def forward(self,g,x):
-        g = self.W_g(g)
-        return x*g
-
