@@ -1,0 +1,16 @@
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80530022014156LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80500092014231LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC81170272014189LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC81310182013108LGN01.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC81220312014208LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC81220422014096LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80670172014206LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80750172013163LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80250022014232LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80441162013330LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80640452014041LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC81180382014244LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80120552013202LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC80180082014215LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC81500152013225LGN00.tar.gz
+https://landsat.usgs.gov/cloud-validation/cca_l8/LC81580172013201LGN00.tar.gz
